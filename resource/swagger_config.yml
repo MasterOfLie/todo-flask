@@ -1,0 +1,133 @@
+swagger: '2.0'
+info:
+  version: "1.0"
+  title: "API de Tarefas"
+  description: "Uma API simples para gerenciar tarefas"
+basePath: "/api"
+schemes:
+  - "http"
+paths:
+  /listar:
+    get:
+      tags:
+        - "tarefas"
+      summary: "Lista todas as tarefas"
+      responses:
+        200:
+          description: "Lista de tarefas"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/Tarefa"
+  /criar:
+    post:
+      tags:
+        - "tarefas"
+      summary: "Cria uma nova tarefa"
+      parameters:
+        - in: "body"
+          name: "body"
+          required: true
+          schema:
+            $ref: "#/definitions/Tarefa"
+      responses:
+        201:
+          description: "Tarefa criada com sucesso"
+          schema:
+            $ref: "#/definitions/Tarefa"
+  /atualizar/status/{id}:
+    put:
+      tags:
+        - "tarefas"
+      summary: "Atualiza o status de uma tarefa"
+      parameters:
+        - name: "id"
+          in: "path"
+          required: true
+          type: "integer"
+        - in: "body"
+          name: "body"
+          required: true
+          schema:
+            $ref: "#/definitions/Tarefa"
+      responses:
+        200:
+          description: "Tarefa atualizada com sucesso"
+          schema:
+            $ref: "#/definitions/Tarefa"
+  /deletar/{id}:
+    delete:
+      tags:
+        - "tarefas"
+      summary: "Deleta uma tarefa"
+      parameters:
+        - name: "id"
+          in: "path"
+          required: true
+          type: "integer"
+      responses:
+        200:
+          description: "Tarefa deletada com sucesso"
+  /atualizar/nome/{id}:
+    put:
+      tags:
+        - "tarefas"
+      summary: "Atualiza o nome de uma tarefa"
+      parameters:
+        - name: "id"
+          in: "path"
+          required: true
+          type: "integer"
+        - in: "body"
+          name: "body"
+          required: true
+          schema:
+            $ref: "#/definitions/Tarefa"
+      responses:
+        200:
+          description: "Nome da tarefa atualizado com sucesso"
+          schema:
+            $ref: "#/definitions/Tarefa"
+  /atualizar/descricao/{id}:
+    put:
+      tags:
+        - "tarefas"
+      summary: "Atualiza a descrição de uma tarefa"
+      parameters:
+        - name: "id"
+          in: "path"
+          required: true
+          type: "integer"
+        - in: "body"
+          name: "body"
+          required: true
+          schema:
+            $ref: "#/definitions/Tarefa"
+      responses:
+        200:
+          description: "Nome da tarefa atualizado com sucesso"
+          schema:
+            $ref: "#/definitions/Tarefa"
+definitions:
+  Tarefa:
+    type: "object"
+    properties:
+      id:
+        type: "integer"
+        readOnly: true
+        description: "O identificador único da tarefa"
+      nome:
+        type: "string"
+        description: "O nome da tarefa"
+      descricao:
+        type: "string"
+        description: "A descrição da tarefa"
+      status:
+        type: "boolean"
+        description: "O status da tarefa"
+      data_criacao:
+        type: "datatime"
+        description: "A data de criação da tarefa"
+        format: "DD/MM/YYYY"
+        readOnly: true
+        
